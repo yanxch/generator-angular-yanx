@@ -1,7 +1,7 @@
 # generator-angular-yanx 
-> [Yeoman](http://yeoman.io) generator
+> [Yeoman](http://yeoman.io) generator for 
 
-*  Angular 1.4
+*  Angular 1.4 project
 *  Using Gulp 
 *  Using a styleguide (John Papas's + Todd Mottos)
 *  Having a basic layout (ui-router)

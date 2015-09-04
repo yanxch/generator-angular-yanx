@@ -1,0 +1,10 @@
+<div class="side-nav fixed">
+    <ul class="side-menu">
+        <li ng-repeat="item in ::vm.items" class="parent-list-item">
+            <a class="waves-effect waves-teal" href={{::item.href}}>
+                <i class="material-icons left small">{{::item.icon}}</i>
+                {{::item.name}}
+            </a>
+        </li>
+    </ul>
+</div>

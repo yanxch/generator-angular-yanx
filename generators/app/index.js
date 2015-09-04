@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var mkdirp = require('mkdirp');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -21,30 +22,33 @@ module.exports = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (props) {
       this.appName = props.appName;
-
       done();
     }.bind(this));
   },
 
   scaffoldFolder: function(){
-    this.mkdir('app');
-    this.mkdir('app/assets');
-    this.mkdir('app/assets/font');
-    this.mkdir('app/assets/font/material-design-icons');
-    this.mkdir('app/assets/font/roboto');
-    this.mkdir('app/assets/sass');
-    this.mkdir('app/assets/sass/materialize');
-    this.mkdir('app/assets/sass/materialize/components');
+    mkdirp('app');
+  },
+  
+  copy: function() {
+    this.fs.copy(
+      this.templatePath("app/*"),
+      this.destinationPath("app")
+    );   
     
-    this.mkdir('app/modules');   
-    this.mkdir('app/modules/core');
-    this.mkdir('app/modules/core/components');
-    this.mkdir('app/modules/core/components/navbar');
-    this.mkdir('app/modules/core/components/sidebar');
-    this.mkdir('app/modules/core/layout');
-    this.mkdir('app/modules/core/layout/config');
-    this.mkdir('app/modules/core/layout/views');  
-    this.mkdir('app/modules/home');
+    this.fs.copy(
+      this.templatePath("app/*/**"),
+      this.destinationPath("app")
+    );   
+    
+    this.fs.copy(this.templatePath("package.json"), this.destinationPath("package.json"));
+    this.fs.copy(this.templatePath("bower.json"), this.destinationPath("bower.json"));
+    this.fs.copy(this.templatePath("gulpfile.js"), this.destinationPath("gulpfile.js"));
+    this.fs.copy(this.templatePath("karma.conf.js"), this.destinationPath("karma.conf.js"));
+    this.fs.copy(this.templatePath("protractor.conf.js"), this.destinationPath("protractor.conf.js"));
+    this.fs.copy(this.templatePath(".jshintrc"), this.destinationPath(".jshintrc"));
+    this.fs.copy(this.templatePath(".bowerrc"), this.destinationPath(".bowerrc"));
+    this.fs.copy(this.templatePath(".editorconfig"), this.destinationPath(".editorconfig"));
   },
 
   install: function () {
